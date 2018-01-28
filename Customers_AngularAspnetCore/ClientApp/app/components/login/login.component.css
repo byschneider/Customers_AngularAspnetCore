@@ -1,0 +1,8 @@
+.red {
+    border: solid 1px red;
+}
+
+.col-centered {
+    margin: 0 auto;
+    float: none;
+}

@@ -1,0 +1,25 @@
+<!--<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-sm-3'>
+            <nav-menu></nav-menu>
+        </div>
+        <div class='col-sm-9 body-content'>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>-->
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-sm-3'>
+            <nav-menu *ngIf="authService.isLoggedIn"></nav-menu>
+        </div>
+        <div class='col-sm-9 body-content'>
+            <div class='row pull-right'>
+                <button *ngIf="authService.isLoggedIn" (click)="LogOut()">Logout</button>
+            </div>
+            <div class='row'>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

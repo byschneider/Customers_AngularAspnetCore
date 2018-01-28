@@ -1,0 +1,91 @@
+<!-- Configurações Iniciais -->
+<h1>Customer List</h1>
+
+
+<div class="form-row">
+    <div class="form-group col-md-6">
+        Name:<br>
+        <input [(ngModel)]="customerFilter.Name" class="form-control" name="name" type="text" placeholder="Digite aqui o nome">
+    </div>
+    <div class="form-group col-md-6">
+        Gender:<br>
+        <select [(ngModel)]="customerFilter.Gender" class="form-control" name="gender">
+            <option value=""></option>
+            <option *ngFor="let gender of genders" [ngValue]="gender.Value">{{gender.Text}}</option>
+        </select>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        City:<br>
+        <select [(ngModel)]="customerFilter.City" class="form-control" name="city">
+            <option value=""></option>
+            <option *ngFor="let city of cities" [ngValue]="city.Value">{{city.Text}}</option>
+        </select>
+    </div>
+    <div class="form-group col-md-6">
+        Region:<br>
+        <select [(ngModel)]="customerFilter.Region" class="form-control" name="region">
+            <option value=""></option>
+            <option *ngFor="let region of regions" [ngValue]="region.Value">{{region.Text}}</option>
+        </select>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        Classification:<br>
+        <select [(ngModel)]="customerFilter.Classification" class="form-control" name="classification">
+            <option value=""></option>
+            <option *ngFor="let classification of classifications" [ngValue]="classification.Value">{{classification.Text}}</option>
+        </select>
+    </div>
+    <div class="form-group col-md-6" *ngIf="authService.loginVM.IsAdmin">
+        Seller:<br>
+        <select [(ngModel)]="customerFilter.Seller" class="form-control" name="seller">
+            <option value=""></option>
+            <option *ngFor="let seller of sellers" [ngValue]="seller.Value">{{seller.Text}}</option>
+        </select>
+    </div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-12 text-center">
+        <button type="button" class="btn btn-primary btn-sm" (click)="Filtrar()">
+            <span class="glyphicon glyphicon-search"></span>
+            Search
+        </button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="Limpar()">
+            <span class="glyphicon glyphicon-remove"></span>
+            Clear Fields
+        </button>
+    </div>
+</div>
+<br />
+<p *ngIf="!customers"><em>Loading...</em></p>
+
+<!-- Listagem -->
+<table class='table' *ngIf="customers">
+    <thead>
+        <tr>
+            <th>Classification</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>City</th>
+            <th>Region</th>
+            <th>Last Purchase</th>
+            <th *ngIf="authService.loginVM.IsAdmin">Seller</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers">
+            <td>{{ customer.Classification }}</td>
+            <td>{{ customer.Name }}</td>
+            <td>{{ customer.Phone }}</td>
+            <td>{{ customer.Gender }}</td>
+            <td>{{ customer.City }}</td>
+            <td>{{ customer.Region }}</td>
+            <td>{{ customer.LastPurchase }}</td>
+            <td *ngIf="authService.loginVM.IsAdmin">{{ customer.Seller }}</td>
+        </tr>
+    </tbody>
+</table>
